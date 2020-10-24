@@ -1,0 +1,4 @@
+importFrom("stringr",   "str_pad")
+importFrom("tidyrules", "tidyRules")
+#-----------------------------------------------
+export(cubist_asR_idioms)
