@@ -1,0 +1,21 @@
+*.pyc
+# Session Data files
+.RData
+.Rhistory
+.Rapp.history
+.Rproj.user
+
+# Occasional accidental file
+Rplots.pdf
+
+# Apple file
+.DS_Store
+
+
+# LaTeX AUX and LOG files
+*.aux
+*.log
+
+# TeXShop.app (a LaTeX application) sync files
+*.synctex.gz
+
