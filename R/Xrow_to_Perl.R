@@ -1,7 +1,7 @@
 "Xrow_to_Perl" <- function(x, row=1, file="", comment=NA) {
   x <- as.data.frame(x)
   nm <- names(x)
-  rw <- x[1,]
+  rw <- x[row,]
 
   if(! is.na(comment)) {
     cat(paste0("# ",comment,"\n"), file=file)
