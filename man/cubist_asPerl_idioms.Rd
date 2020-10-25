@@ -2,20 +2,20 @@
 \alias{cubist_asPerl_idioms}
 \title{Export Tidy Rules of Cubist Object to Perl Idioms}
 \description{
-This function exports one \pkg{Perl} module source code file containing low-level idioms of the language so that the Cubist model can be reused or idiom implemented without having the Cubist library itself. The function, thus, permits dependency free archival of a Cubist model based on the basic functionality of the language.
+This function exports one \bold{Perl} module source code file containing low-level idioms of the language so that the \pkg{Cubist} model can be reused or idiom implemented without having the \pkg{Cubist} package itself. The function, thus, permits dependency free archival of a \pkg{Cubist} model based on the basic functionality of the language.
 
-For idiom implementation, it is important that the concept of \dQuote{neighbors} as a feature and argument to the prediction of Cubist not be used. The pursuit here, for a given row of the input matrix, is to isolate by name each applicable rule and then trigger a prediction for each rule and then pool the estimate by some method.
+For idiom implementation, it is important that the concept of \dQuote{neighbors} as a feature and argument to the prediction of \pkg{Cubist} not be used. The pursuit here, for a given row of the input matrix, is to isolate by name each applicable rule and then trigger a prediction for each rule and then pool the estimate by some method.
 }
 \usage{
 cubist_asPerl_idioms(cubist_object, cubist_tag="C0", nut_digits=3,
-                     parentpmdir="MAP", path=".", prefix="",
+                     parentpmdir="IDIOMS", path=".", prefix="",
                      tidyrule.return=FALSE, sample_str="", ...)
 }
 \arguments{
-  \item{cubist_object}{Either a Cubist object (model) from the \pkg{Cubist} package on which the function \cr \code{tidyrules::tidyRules()} will be called or the results from the user already having called \code{tidyRules()} on the Cubist object;}
-  \item{cubist_tag}{A string thought of a being a small fragment of arbitrary text chosen by a user that identifies a particular Cubist model;}
+  \item{cubist_object}{Either a \pkg{Cubist} object (model) from the \pkg{Cubist} package on which the function \cr \code{tidyrules::tidyRules()} will be called or the results from the user already having called \code{tidyRules()} on the \pkg{Cubist} object;}
+  \item{cubist_tag}{A string thought of a being a small fragment of arbitrary text chosen by a user that identifies a particular \pkg{Cubist} model;}
   \item{nut_digits}{The number of digits to pass to the \code{round} function as the nuts of each branch are written. This helps keep file sizes down and the written code more readable than letting full floating point result;}
-  \item{parentpmdir}{The top-level directory name that the output file would need to be migrated into. For example, the default would represent a path of \code{MAP::cubist*.pm} of the \pkg{Perl} module where the \code{*} is the \code{cubist_tag};}
+  \item{parentpmdir}{The top-level directory name that the output file would need to be migrated into. For example, the default would represent a path of \code{IDIOMS::cubist*.pm} of the \bold{Perl} module where the \code{*} is the \code{cubist_tag};}
   \item{path}{The directory path to which the various \R files are to be written;}
   \item{prefix}{A string that is prefixed to the output file names of this function. This option is useful if the \code{cubist_tag} is a number to avoid having file names starting with a number;}
   \item{tidyrule.return}{A logical triggering the \code{tidyrules::tidyRules()} data frame;}
@@ -26,7 +26,7 @@ cubist_asPerl_idioms(cubist_object, cubist_tag="C0", nut_digits=3,
   This function is used for its side effects written to the file system, but can be used to return without modification the results of the \code{tidyrules::tidyRules()} function.
 }
 \author{ W.H. Asquith}
-\seealso{ \code{\link{cubist_asR_idioms}} }
+\seealso{ \code{\link{Xrow_to_Perl}}, \code{\link{cubist_asR_idioms}} }
 \examples{
 \dontrun{
 # We set the simulation sample size to 1,000; the number of committees is 3.
@@ -43,9 +43,9 @@ cubist_tag <- paste0("C",cubist_tag) # create the tag "C9" to be used
 X <- sort(runif(nsim, min=0, max=2))
 Y <- 0.34*sin(2*pi*X) - .74*cos(2*pi*X) -
      0.14*sin(4*pi*X) + .19*cos(4*pi*X) + rnorm(nsim, sd=0.2)
-X <- data.frame(X=X, never=pi) # the design that follows both by Cubist
+X <- data.frame(X=X, pi=pi) # the design that follows both by Cubist
 # and by the idiom functions in this package need at least two columns
-# even if the second is never used.
+# even if the second column containing pi is never used.
 
 # We can foreshadow some type of cross-validation, but here just use all.
 phi <- 1
@@ -75,4 +75,4 @@ print(files)
 # made, and the cubist_utils.R is tag-independent and has a couple
 # of accessor functions to work with the our big picture }
 }
-\keyword{R language}
+\keyword{Perl language}

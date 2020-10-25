@@ -1,6 +1,6 @@
 "cubist_asPerl_idioms" <-
 function(cubist_object, cubist_tag="C0", nut_digits=3,
-         parentpmdir="MAP", path=".", prefix="",
+         parentpmdir="IDIOMS", path=".", prefix="",
          tidyrule.return=FALSE, sample_str="", ...) {
   if(class(cubist_object)[1] == "tbl_df") {
     tidy_cubist <- cubist_object
