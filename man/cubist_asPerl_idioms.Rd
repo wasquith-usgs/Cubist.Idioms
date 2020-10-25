@@ -13,10 +13,10 @@ cubist_asPerl_idioms(cubist_object, cubist_tag="C0", nut_digits=3,
 }
 \arguments{
   \item{cubist_object}{Either a \pkg{Cubist} object (model) from the \pkg{Cubist} package on which the function \cr \code{tidyrules::tidyRules()} will be called or the results from the user already having called \code{tidyRules()} on the \pkg{Cubist} object;}
-  \item{cubist_tag}{A string thought of a being a small fragment of arbitrary text chosen by a user that identifies a particular \pkg{Cubist} model;}
+  \item{cubist_tag}{A string thought of a being a small fragment of arbitrary text chosen by a user that identifies a particular \pkg{Cubist} model. This tag is critically important and useful for subroutines on export and the \bold{Perl} module nomenclature will have this tag in their names;}
   \item{nut_digits}{The number of digits to pass to the \code{round} function as the nuts of each branch are written. This helps keep file sizes down and the written code more readable than letting full floating point result;}
   \item{parentpmdir}{The top-level directory name that the output file would need to be migrated into. For example, the default would represent a path of \code{IDIOMS::cubist*.pm} of the \bold{Perl} module where the \code{*} is the \code{cubist_tag};}
-  \item{path}{The directory path to which the various \R files are to be written;}
+  \item{path}{The directory path to which the various \bold{Perl} files are to be written;}
   \item{prefix}{A string that is prefixed to the output file names of this function. This option is useful if the \code{cubist_tag} is a number to avoid having file names starting with a number;}
   \item{tidyrule.return}{A logical triggering the \code{tidyrules::tidyRules()} data frame;}
   \item{sample_str}{An arbitrary string of sample-size summary information about the Cubist model that the user wants to give over to the idiom implementation by creating a variable \code{$SAMPLE_STR} equal to \code{sample_str};}
@@ -35,9 +35,9 @@ nsim <- 1000; committees <- 3
 # The high-level design is to have the ability to tag a given Cubist object.
 # The tag will be used as output files and subroutines and variables therein
 # are written.
-cubist_tag <- 9 # say our "ninth" Cubist object
+cubist_tag <- 0 # say our "zeroth order" Cubist object
 set.seed(cubist_tag) # arbitrary here, but setting the seed for reproducibility
-cubist_tag <- paste0("C",cubist_tag) # create the tag "C9" to be used
+cubist_tag <- paste0("C",cubist_tag) # create the tag "C0" to be used
 
 # simulate some X and Y data
 X <- sort(runif(nsim, min=0, max=2))

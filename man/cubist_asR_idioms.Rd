@@ -13,7 +13,7 @@ cubist_asR_idioms(cubist_object, cubist_tag="C0", nut_digits=3,
 }
 \arguments{
   \item{cubist_object}{Either a \pkg{Cubist} object (model) from the \pkg{Cubist} package on which the function \cr \code{tidyrules::tidyRules()} will be called or the results from the user already having called \code{tidyRules()} on the \pkg{Cubist} object;}
-  \item{cubist_tag}{A string thought of a being a small fragment of arbitrary text chosen by a user that identifies a particular \pkg{Cubist} model;}
+  \item{cubist_tag}{A string thought of a being a small fragment of arbitrary text chosen by a user that identifies a particular \pkg{Cubist} model. This tag is critically important and useful for subroutines on export and the \R files will have this tag in their names;}
   \item{nut_digits}{The number of digits to pass to the \code{round} function as the nuts of each branch are written. This helps keep file sizes down and the written code more readable than letting full floating point result;}
   \item{path}{The directory path to which the various \R files are to be written;}
   \item{prefix}{A string that is prefixed to the output file names of this function. This option is useful if the \code{cubist_tag} is a number to avoid having file names starting with a number;}

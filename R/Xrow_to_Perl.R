@@ -6,7 +6,8 @@
   if(! is.na(comment)) {
     cat(paste0("# ",comment,"\n"), file=file)
   }
-  cat("  $X = {\n", file=file)
+  cat(paste0("$ROW = ",row,";\n"), file=file)
+  cat("$X = {\n", file=file)
   for(i in 1:(length(nm)-1)) {
     if(is.na(rw[i])) rw[i] <- '"infinity"'
     cat(paste0("   ",nm[i], " => ", rw[i],",\n"), file=file)
