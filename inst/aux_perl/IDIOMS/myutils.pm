@@ -1,10 +1,11 @@
 package IDIOMS::myutils;
 use strict;
 use utf8;
-use vars qw( @ISA @EXPORT $ROBUST_ERROR_FACTOR $FINAL_ERROR_INFLATOR $PLUSMINUS $UNITS);
+use vars qw( @ISA @EXPORT $ROBUST_ERROR_FACTOR $FINAL_ERROR_INFLATOR $PLUSMINUS $UNITS
+                          $DECIMAL_OUTPUT );
 use Exporter;
 @ISA    = qw( Exporter );
-@EXPORT = qw( $ROBUST_ERROR_FACTOR $FINAL_ERROR_INFLATOR $PLUSMINUS $UNITS
+@EXPORT = qw( $ROBUST_ERROR_FACTOR $FINAL_ERROR_INFLATOR $PLUSMINUS $UNITS $DECIMAL_OUTPUT
               median mean_and_stdev weighted_mean_mean_error commify 
               getBranches makeNuts removeInfinites robustAdjustment
               inspectResults makeResults stringResults crackBranch crackNut XrowToHashRef
@@ -13,6 +14,7 @@ use Exporter;
 $ROBUST_ERROR_FACTOR  = 5; # used by &robustAdjustment()
 $FINAL_ERROR_INFLATOR = 1;
 $UNITS = "ft"; # feet
+$DECIMAL_OUTPUT = 2;
 
 # Unicode Character “±” (U+00B1)
 $PLUSMINUS = "\x{00B1}";#"±";
@@ -65,7 +67,7 @@ sub makeResults {
   my $n_original = $diagnostics->{number_rules_orginally_found};
   my $n_finite   = $diagnostics->{number_rules_after_finite_test};
 
-  my $fmt = "%.2f";
+  my $fmt = "%.".$DECIMAL_OUTPUT."f";
 
   my $r = scalar @vals;
   my @musd = mean_and_stdev(\@sups);
@@ -106,7 +108,8 @@ sub stringResults {
   my $n_original = $href->{number_rules_orginally_found};
   my $n_finite   = $href->{number_rules_after_finite_test};
   
-  my ($fmt, $txt) = ("%.2f", "");
+  my $fmt = "%.".$DECIMAL_OUTPUT."f";
+  my $txt = "";
 
   $txt .= "   Some $n_original rules(regressions) were found, and $n_finite had finite output. Then the \n";
 
@@ -141,7 +144,8 @@ sub inspectResults {
   my @errs = @{shift(@_)};
   my @mods = @{shift(@_)};
 
-  my ($fmt, $txt) = ("%.2f", "");
+  my $fmt = "%.".$DECIMAL_OUTPUT."f";
+  my $txt = "";
 
   map { $_ = sprintf($fmt, $_) } @vals;
   map { $_ = sprintf($fmt, $_) } @mues;
