@@ -1,4 +1,5 @@
 importFrom("stringr",   "str_pad")
 importFrom("tidyrules", "tidyRules")
 #-----------------------------------------------
+export(cubist_asPerl_idioms)
 export(cubist_asR_idioms)

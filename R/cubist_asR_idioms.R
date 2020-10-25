@@ -1,7 +1,7 @@
 "cubist_asR_idioms" <-
-function(cubist_object, cubist_tag="0", nut_digits=3,
-                        path=".", prefix="", tidyrule.return=FALSE,
-                        sample_str="", ...) {
+function(cubist_object, cubist_tag="C0", nut_digits=3,
+         path=".", prefix="", tidyrule.return=FALSE,
+         sample_str="", ...) {
 
   if(class(cubist_object)[1] == "tbl_df") {
     tidy_cubist <- cubist_object
@@ -12,7 +12,7 @@ function(cubist_object, cubist_tag="0", nut_digits=3,
     tidy_cubist <- tidyrules::tidyRules(cubist_object)
   }
   cubist_tag <- cubist_tag[1] # silent devectorization
-  nut_digits  <- nut_digits[1]  # silent devectorization
+  nut_digits <- nut_digits[1] # silent devectorization
   ixfrag <- paste0("MOD",cubist_tag,"_")
 
   path <- paste0(gsub("\\/$", "", path),"/")
@@ -25,7 +25,7 @@ function(cubist_object, cubist_tag="0", nut_digits=3,
   FH <- file(paste0(path,prefix,cubist_tag,"cubist_funcs.R"), open="w") # righthand side of Cubist
   NH <- file(paste0(path,prefix,cubist_tag,"cubist_nuts.R"),  open="w") # support, mean, min, max, error
   RH <- file(paste0(path,prefix,cubist_tag,"cubist_rules.R"), open="w") # lefthand side of Cubist
-  UT <- file(paste0(path,prefix,"cubist_utils.R"),             open="w") # wrapper utilities
+  UT <- file(paste0(path,prefix,"cubist_utils.R"),            open="w") # wrapper utilities
 
   # MODel (result from a call to Cubist::cubist()). Could have multiple
   #    models formed from independent slices of the data set.

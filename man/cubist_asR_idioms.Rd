@@ -7,9 +7,9 @@ This function exports five \R source code files containing low-level idioms of t
 For idiom implementation, it is important that the concept of \dQuote{neighbors} as a feature and argument to the prediction of Cubist not be used. The pursuit here, for a given row of the input matrix, is to isolate by name each applicable rule and then trigger a prediction for each rule and then pool the estimate by some method.
 }
 \usage{
-cubist_asR_idioms(cubist_object, cubist_tag="0", nut_digits=3,
-                                 path=".", prefix="", tidyrule.return=FALSE,
-                                 sample_str="", ...)
+cubist_asR_idioms(cubist_object, cubist_tag="C0", nut_digits=3,
+                  path=".", prefix="", tidyrule.return=FALSE,
+                  sample_str="", ...)
 }
 \arguments{
   \item{cubist_object}{Either a Cubist object (model) from the \pkg{Cubist} package on which the function \cr \code{tidyrules::tidyRules()} will be called or the results from the user already having called \code{tidyRules()} on the Cubist object;}
@@ -25,7 +25,7 @@ cubist_asR_idioms(cubist_object, cubist_tag="0", nut_digits=3,
   This function is used for its side effects written to the file system, but can be used to return without modification the results of the \code{tidyrules::tidyRules()} function.
 }
 \author{ W.H. Asquith}
-\seealso{ }
+\seealso{  \code{\link{cubist_asPerl_idioms}} }
 \examples{
 \donttest{
 # We set the simulation sample size to 1,000; the number of committees is 3.
