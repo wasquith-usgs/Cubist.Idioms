@@ -1,6 +1,6 @@
 Package: Cubist.Idioms
 Type: Package
-Title: Convert Cubist Tidy Rules to R and Other Language Idioms
+Title: Convert Tidy Rules of Cubist into R and Other Language Idioms
 Version: 0.0.1
 Depends: R (>= 3.6.0), tidyrules
 Imports: stringr
