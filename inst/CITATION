@@ -1,0 +1,16 @@
+citHeader("To cite package 'Cubist.Idioms' in publications use:")
+
+year  <- sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date)
+vers  <- paste("R package version",           meta$Version)
+title <- "Cubist.Idioms---Convert Tidy Rules of Cubist into R and other language idioms"
+
+citEntry(entry="Manual",
+         title  = title,
+         author = personList(as.person("W.H. Asquith")),
+         year   = year,
+         note   = vers,
+         textVersion =
+         paste("Asquith, W.H., ", year,
+               ", ", title, ". ",
+               vers, ", Experimental Work.",
+               sep=""))
