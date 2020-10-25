@@ -36,7 +36,7 @@ nsim <- 1000; committees <- 3
 # The tag will be used as output files and subroutines and variables therein
 # are written.
 cubist_tag <- 0 # say our "zeroth order" Cubist object
-set.seed(cubist_tag) # arbitrary here, but setting the seed for reproducibility
+set.seed(9) # arbitrary here, but setting the seed for reproducibility
 cubist_tag <- paste0("C",cubist_tag) # create the tag "C0" to be used
 
 # simulate some X and Y data
