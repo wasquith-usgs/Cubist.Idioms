@@ -101,7 +101,7 @@ CUBES <- eval(parse(text=paste0("CUBES_",cubist_tag)))
 # the use of mean() is basically how Cubist works if neighbors=0, but
 # because we have errors, a weighted mean is also accessible.
 # is.na()'s (if they hit) are trapped separately, so we do not use
-# na.rm=TRUE for the mean()/weighted.mean()
+# na.rm=TRUE for the mean() or weighted.mean()
 Y_by_idioms_mean <- Y_by_idioms_wgt <- rep(NA, nrow(X))
 
 # loop through the rows of the input matrix
@@ -125,7 +125,7 @@ for(i in 1:nrow(X)) {
 }
 message("Last row in X matrix had these branches and nuts\n")
 print(nt) # showing here the structure idea of the "nut"
-#                   support   mean    min    max error
+#                    support   mean    min    max error
 # MODC9_COM01_BRA002     172 -0.566 -1.293 -0.048 0.174
 # MODC9_COM02_BRA001      80 -0.573 -1.269 -0.117 0.168
 # MODC9_COM03_BRA002     172 -0.566 -1.293 -0.048 0.174
