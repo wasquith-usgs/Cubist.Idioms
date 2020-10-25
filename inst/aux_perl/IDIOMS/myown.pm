@@ -5,7 +5,9 @@ use vars qw( @ISA @EXPORT );
 use Exporter;
 @ISA    = qw( Exporter );
 @EXPORT = qw( countExtract_Well_and_Level useExtracted_Well_and_Level );
-              
+
+use IDIOMS::myutils;
+
 sub countExtract_Well_and_Level {
   my @sample_info = @_;
   my (@well_counts, @levl_counts, @parent_counts) = ( (), (), () );
