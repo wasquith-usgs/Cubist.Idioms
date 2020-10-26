@@ -56,6 +56,19 @@ sub readLine {
   return( \%line );
 }
 
+sub lineResults {
+  my $href = shift;
+  my $show_labels = shift;
+  my @keys = sort keys %{$href};
+  my @vals = ();
+  foreach my $key (@keys) {
+    push(@vals, $href->{$key});
+  }
+  print join("\t", @keys),"\n" if($show_labels);
+  print join("\t", @vals),"\n";
+}
+
+
 if(! $show_string_results) {
   print "#ROW and rest of output names to insert here\n"
 }
@@ -179,10 +192,6 @@ while(<>) {
     print $results_str;
     print "-------------------------------------------------------------------------------\n";
   } else {
-    my @line = ();
-    push(@line, ($row_i, $results->{weighted_mean_estimate}));
-    push(@line,          $results->{weighted_mean_errors});
-    push(@line, $diagnostics->{used_medians_as_backup});
-    print join("\t", @line),"\n";
+    lineResults($results, 1);
   }
 }
