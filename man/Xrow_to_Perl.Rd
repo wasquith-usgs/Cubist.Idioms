@@ -11,7 +11,7 @@ Xrow_to_Perl(x, row=1, file="", comment=NA)
   \item{x}{A data frame having at least the columns required by a \pkg{Cubist} model that the uer is pursuing. This data frame must be compatible with \code{Cubist::cubist()} and \code{Cubist::predict.cubist()};}
   \item{row}{The row number in \code{x} to export;}
   \item{file}{The argument of the same name and purpose as \code{file} for the \code{cat()} function. This is a connection; and}
-  \item{comment}{An optional comment line that is written before \code{$X = ...}.}
+  \item{comment}{An optional comment line that is written before the rest of the variables.}
 }
 \value{
   This function is used for its side effects written to the file system or to the console.
