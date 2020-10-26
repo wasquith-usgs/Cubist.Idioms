@@ -179,6 +179,10 @@ while(<>) {
     print $results_str;
     print "-------------------------------------------------------------------------------\n";
   } else {
-    print "$row_i,",$line->{YEAR}+$line->{FRAC_YEAR},",$results->{weighted_mean_estimate},$results->{weighted_mean_errors},$diagnostics->{used_medians_as_backup}\n";
+    my @line = ();
+    push(@line, ($row_i, $results->{weighted_mean_estimate}));
+    push(@line,          $results->{weighted_mean_errors});
+    push(@line, $diagnostics->{used_medians_as_backup});
+    print join("\t", @line),"\n";
   }
 }
