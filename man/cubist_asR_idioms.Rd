@@ -9,20 +9,27 @@ For idiom implementation, it is important that the concept of \dQuote{neighbors}
 \usage{
 cubist_asR_idioms(cubist_object, cubist_tag="C0", nut_digits=3,
                   path=".", prefix="", tidyrule.return=FALSE,
-                  sample_str="", ...)
+                  sample_str="", var.names=NULL, write.utility.file=TRUE, ...)
 }
 \arguments{
   \item{cubist_object}{Either a \pkg{Cubist} object (model) from the \pkg{Cubist} package on which the function \cr \code{tidyrules::tidyRules()} will be called or the results from the user already having called \code{tidyRules()} on the \pkg{Cubist} object;}
-  \item{cubist_tag}{A string thought of a being a small fragment of arbitrary text chosen by a user that identifies a particular \pkg{Cubist} model. This tag is critically important and useful for subroutines on export and the \R files will have this tag in their names;}
+  \item{cubist_tag}{A string thought of a being a small fragment of arbitrary text chosen by a user that identifies a particular \pkg{Cubist} model. This tag is critically important and useful for subroutines on export and the \R files will have this tag in their names. In imagined use, it is expected that the tag would be a just one or two characters long;}
   \item{nut_digits}{The number of digits to pass to the \code{round} function as the nuts of each branch are written. This helps keep file sizes down and the written code more readable than letting full floating point result;}
   \item{path}{The directory path to which the various \R files are to be written;}
   \item{prefix}{A string that is prefixed to the output file names of this function. This option is useful if the \code{cubist_tag} is a number to avoid having file names starting with a number;}
   \item{tidyrule.return}{A logical triggering the \code{tidyrules::tidyRules()} data frame;}
   \item{sample_str}{An arbitrary string of sample-size summary information or really any other content about the \pkg{Cubist} model that the user wants to give over to the idiom implementation by creating a variable \code{SAMPLE_STR} equal to \code{sample_str}. The user would then do their own development to parse this variable for their own purposes;}
+  \item{var.names}{The comprehensive list of variable names given over to the \pkg{Cubist} fitting. These names need to be specified at least once for a given use of \code{write.utility.file} being set. The variable names are automatically derived from the \code{cubist_object}, if such an object (not \code{tidyRules}) is fed as the first argument, by the internal logic \code{names(cubist_object$coefficients)}. So if \code{tidyRules} were used for the first argument, then at some point, the user would have to specify\cr \code{var.names=names(cubist_object$coefficients)};}
+  \item{write.utility.file}{A logical to trigger the writing of the \code{cubist_utils.R} file. This file is specific \code{cubist_tag} independent and only needs to be written once; and}
   \item{...}{Additional arguments to pass (currently not used);}
 }
 \value{
   This function is used for its side effects written to the file system, but can be used to return without modification the results of the \code{tidyrules::tidyRules()} function.
+}
+\note{
+Basic description of the written files by this function follow in this section.
+
+\bold{Utilities:} The file \code{cubist_utils.R} contains \code{cubist_tag} independent logic that is used as an abstraction layer to access the various idioms specific to the \pkg{Cubist} rules, branches, and nuts. The function therein \code{getVARIABLE_NAMES} returns a vector of variable names given over to \pkg{Cubist}. This vector could be used to testing external incoming input data frames as having all of the variables required. The function therein \code{useBRANCH} is the abstraction layer to access the linear model at the end of each rule by evaluation of its function name; this material is the linear model as shown by \code{tidyrules::tidyRules()}. Finally, the function therein \code{getNUTS} is the abstraction layer to access the diagnostics about the rule as shown by \code{tidyrules::tidyRules()} that include the support (number of observations) for the rule, mean response value for the rule, minimum response value for the rule, maximum response value for the rule, and error in units of the response for the linear model.
 }
 \author{ W.H. Asquith}
 \seealso{  \code{\link{cubist_asPerl_idioms}} }

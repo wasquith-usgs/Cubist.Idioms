@@ -1,7 +1,7 @@
 "cubist_asR_idioms" <-
 function(cubist_object, cubist_tag="C0", nut_digits=3,
          path=".", prefix="", tidyrule.return=FALSE,
-         sample_str="", ...) {
+         sample_str="", var.names=NULL, write.utility.file=TRUE, ...) {
 
   if(class(cubist_object)[1] == "tbl_df") {
     tidy_cubist <- cubist_object
@@ -9,6 +9,10 @@ function(cubist_object, cubist_tag="C0", nut_digits=3,
     warning("cubist variable is not a 'cubist' object")
     return()
   } else {
+    var.names <- names(cubist_object$coefficients)
+    var.names[1] <- NA # (Intercept)
+    var.names[(length(var.names)-1):length(var.names)] <- NA # committee and rule
+    var.names <- var.names[! is.na(var.names)]
     tidy_cubist <- tidyrules::tidyRules(cubist_object)
   }
   cubist_tag <- cubist_tag[1] # silent devectorization
@@ -25,8 +29,9 @@ function(cubist_object, cubist_tag="C0", nut_digits=3,
   FH <- file(paste0(path,prefix,cubist_tag,"cubist_funcs.R"), open="w") # righthand side of Cubist
   NH <- file(paste0(path,prefix,cubist_tag,"cubist_nuts.R"),  open="w") # support, mean, min, max, error
   RH <- file(paste0(path,prefix,cubist_tag,"cubist_rules.R"), open="w") # lefthand side of Cubist
-  UT <- file(paste0(path,prefix,"cubist_utils.R"),            open="w") # wrapper utilities
-
+  if(write.utility.file) {
+    UT <- file(paste0(path,prefix,"cubist_utils.R"),            open="w") # wrapper utilities
+  }
   # MODel (result from a call to Cubist::cubist()). Could have multiple
   #    models formed from independent slices of the data set.
   # COMmmittee (a "boost" of branches for MODel [A|B|C|...])
@@ -127,18 +132,41 @@ function(cubist_object, cubist_tag="C0", nut_digits=3,
   close(NH)
   close(RH)
 
-  cat("useBRANCH <- function(x, rules=NULL, cubes=NULL) {\n", file=UT)
-  cat("  if(is.null(rules)) rules <- cubes(x)\n",             file=UT)
-  cat("  return(sapply(rules, function(k) {\n",               file=UT)
-  cat("  eval(parse(text=paste0(k,'(x)'))) }) )\n",           file=UT)
-  cat("}\n\n",                                                file=UT)
-  cat("getNUTS <- function(rules=NULL, cubes=NULL, x=NULL) {\n", file=UT)
-  cat("  if(is.null(rules)) rules <- cubes(x)\n",             file=UT)
-  cat("  nt <- sapply(rules, function(k) eval(parse(text=paste0(k,'_NUT()'))))\n", file=UT)
-  cat("  nt <- as.data.frame(t(nt))\n",                       file=UT)
-  cat("  nt$support <- as.integer(nt$support)\n",             file=UT)
-  cat("  return(nt)\n",                                       file=UT)
-  cat("}\n",                                                  file=UT)
-  close(UT)
+  if(write.utility.file) {
+    if(is.null(var.names)) {
+      warning(" var.names is NULL, please use \n",
+              "'var.names=names(cubist_object$coefficients)'\n",
+              " if you are passing tidyRules in lieu of the cubist_object")
+    }
+    n <- length(var.names)
+    cat("getVARIABLE_NAMES <- function() {\n",   file=UT)
+    if(is.null(var.names)) {
+      cat("  c()\n",                             file=UT)
+    } else {
+      cat("  c(\n",                              file=UT)
+      for(nm in var.names[1:(n-1)]) {
+        cat(paste0("     '",nm,"',\n"),          file=UT)
+      }
+        cat(paste0("     '",var.names[n],"'\n"), file=UT)
+      cat("   )\n",                              file=UT)
+    }
+    cat("}\n\n",                                 file=UT)
+
+    cat("useBRANCH <- function(x, rules=NULL, cubes=NULL) {\n", file=UT)
+    cat("  if(is.null(rules)) rules <- cubes(x)\n",             file=UT)
+    cat("  return(sapply(rules, function(k) {\n",               file=UT)
+    cat("  eval(parse(text=paste0(k,'(x)'))) }) )\n",           file=UT)
+    cat("}\n\n",                                                file=UT)
+
+    cat("getNUTS <- function(rules=NULL, cubes=NULL, x=NULL) {\n", file=UT)
+    cat("  if(is.null(rules)) rules <- cubes(x)\n",             file=UT)
+    cat("  nt <- sapply(rules, function(k) eval(parse(text=paste0(k,'_NUT()'))))\n", file=UT)
+    cat("  nt <- as.data.frame(t(nt))\n",                       file=UT)
+    cat("  nt$support <- as.integer(nt$support)\n",             file=UT)
+    cat("  return(nt)\n",                                       file=UT)
+    cat("}\n",                                                  file=UT)
+    close(UT)
+  }
+
   if(tidyrule.return) return(tidy_cubist)
 }
