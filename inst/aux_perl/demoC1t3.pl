@@ -10,8 +10,8 @@ use lib dirname(abs_path($0));
 
 use vars qw(%OPTS);
 
-use IDIOMS::myutils;
-use IDIOMS::myown;
+use IDIOMS::cubistUtils;
+use IDIOMS::cubistAux;
 
 use IDIOMS::cubistC1;
 use IDIOMS::cubistC2;
@@ -29,10 +29,10 @@ $ROBUST_ERROR_FACTOR = $OPTS{"error_factor"} if($OPTS{"error_factor"});
 
 my $show_string_results = $OPTS{"string_results"} ? 1 : 0;
 
-my @RULE_BRA = ($RULE_BRAC1, $RULE_BRAC2, $RULE_BRAC3);
-my      @BRA = ($BRAC1, $BRAC2, $BRAC3);
-my      @NUT = ($NUTC1, $NUTC2, $NUTC3);
-my @SAMPLE_INFO = ($SAMPLE_STRC1, $SAMPLE_STRC2, $SAMPLE_STRC3);
+my @RULE_BRA    = formRuleBranches($RULE_BRAC1, $RULE_BRAC2, $RULE_BRAC3);
+my      @BRA    = formBranches($BRAC1, $BRAC2, $BRAC3);
+my      @NUT    = formNuts($NUTC1, $NUTC2, $NUTC3);
+my @SAMPLE_INFO = formSampleInfo($SAMPLE_STRC1, $SAMPLE_STRC2, $SAMPLE_STRC3);
 
 my $diagnostics = {};
 my $checkin;

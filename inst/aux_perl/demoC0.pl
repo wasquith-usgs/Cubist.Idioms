@@ -8,8 +8,8 @@ use Cwd qw( abs_path );
 use File::Basename qw( dirname );
 use lib dirname(abs_path($0));
 
-use IDIOMS::myutils;
-use IDIOMS::myown;
+use IDIOMS::cubistUtils;
+use IDIOMS::cubistAux;
 use IDIOMS::cubistC0;
 
 use vars qw( %OPTS $ROW $X );
@@ -24,10 +24,10 @@ $ROBUST_ERROR_FACTOR = $OPTS{"error_factor"} if($OPTS{"error_factor"});
 
 my $show_string_results = $OPTS{"string_results"} ? 1 : 0;
 
-my @RULE_BRA = ($RULE_BRAC0);
-my      @BRA = ($BRAC0);
-my      @NUT = ($NUTC0);
-my @SAMPLE_INFO = ($SAMPLE_STRC0);
+my @RULE_BRA    = formRuleBranches($RULE_BRAC0);
+my      @BRA    = formBranches($BRAC0);
+my      @NUT    = formNuts($NUTC0);
+my @SAMPLE_INFO = formSampleInfo($SAMPLE_STRC0);
 
 my $diagnostics = {};
 my $checkin;
