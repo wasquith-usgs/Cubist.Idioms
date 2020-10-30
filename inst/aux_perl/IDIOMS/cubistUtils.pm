@@ -1,4 +1,4 @@
-package IDIOMS::myutils;
+package IDIOMS::cubistUtils;
 use strict;
 use utf8;
 use vars qw( @ISA @EXPORT $ROBUST_ERROR_FACTOR $FINAL_ERROR_INFLATOR $PLUSMINUS $UNITS
@@ -21,6 +21,25 @@ $PLUSMINUS = "\x{00B1}";#"±";
 #print "$pm\n";  # need binmode STDOUT, ":encoding(utf8)"; near top of parent script.
 #https://en.wikibooks.org/wiki/Perl_Programming/Unicode_UTF-8
 
+
+# yes the next four functions are trivial, WHA is gambling that an abstraction layer 
+# of sometype will eventually be needed, however we have constructed a verb with each
+# of the functions that helps shout out what is purpose is
+sub formRuleBranches {
+    return(@_);
+}
+
+sub formBranches {
+    return(@_);
+}
+
+sub formNuts {
+    return(@_);
+}
+
+sub formSampleInfo {
+    return(@_);
+}
 
 sub commify {
   my $text = reverse shift;
