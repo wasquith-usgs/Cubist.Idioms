@@ -1,4 +1,4 @@
-package IDIOMS::myown;
+package IDIOMS::Aux;
 use strict;
 use utf8;
 use vars qw( @ISA @EXPORT );
@@ -6,7 +6,7 @@ use Exporter;
 @ISA    = qw( Exporter );
 @EXPORT = qw( countExtract_Location_and_Response useExtracted_Location_and_Response );
 
-use IDIOMS::myutils;
+use IDIOMS::cubistUtils;
 
 sub countExtract_Location_and_Response {
   my @sample_info = @_;
