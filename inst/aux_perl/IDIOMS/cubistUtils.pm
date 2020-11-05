@@ -103,7 +103,7 @@ sub makeResults {
 
   @musd = weighted_mean_mean_error(\@vals, \@errs);
   my $weighted_mean_estimate = sprintf($fmt, $musd[0]);
-  my $weighted_mean_errors   = sprintf($fmt, $musd[1]);
+  my $weighted_mean_error    = sprintf($fmt, $musd[1]);
 
   my $href = {};
   $href->{number_rules_orginally_found}   = $n_original;
@@ -116,7 +116,7 @@ sub makeResults {
   $href->{mean_estimate}          = $mean_estimate;
   $href->{stdev_of_estimates}     = $stdev_of_estimates;
   $href->{weighted_mean_estimate} = $weighted_mean_estimate;
-  $href->{weighted_mean_errors}   = $weighted_mean_errors;
+  $href->{weighted_mean_error}    = $weighted_mean_error;
   $href;
 }
 
@@ -149,9 +149,9 @@ sub stringResults {
                   "are $mean_estimate $UNITS and $stdev_of_estimates $UNITS.\n";
 
   my $weighted_mean_estimate = $href->{weighted_mean_estimate};
-  my $weighted_mean_errors   = $href->{weighted_mean_errors};
+  my $weighted_mean_error    = $href->{weighted_mean_error};
   $txt .= "   Final weighted mean $PLUSMINUS weighted mean error is ".
-                  "$weighted_mean_estimate $UNITS $PLUSMINUS $weighted_mean_errors $UNITS.\n";
+                  "$weighted_mean_estimate $UNITS $PLUSMINUS $weighted_mean_error $UNITS.\n";
 }
 
 sub inspectResults {
