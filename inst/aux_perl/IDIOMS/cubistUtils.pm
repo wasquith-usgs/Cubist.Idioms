@@ -201,8 +201,9 @@ sub removeInfinites {
 
   my ($inf, $nan) = (0,0);
   foreach my $i (0..$#values) {
-    if($values[$i] =~ /nan/) {
-      $nan++;
+    if($values[$i] =~ /NaN/ |   # can Perl actually result in nan and NaN
+       $values[$i] =~ /nan/) {  # as "NaN" differences in underlying C? 
+      $nan++;                   # The "or" her is a kind of a late fix in code development cycle
       $values[$i] = "inf";
     }
     if($values[$i] =~ /inf/) {
