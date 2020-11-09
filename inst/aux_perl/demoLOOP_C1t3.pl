@@ -131,7 +131,6 @@ while(<>) {
   $diagnostics->{number_rules_orginally_found} = scalar @vals;
   if($diagnostics->{number_rules_orginally_found} == 0) {
     print STDERR "WARNING: row=$row_i : no rules original search\n";
-    next;
   }
 
   #print STDERR "\n\n";
