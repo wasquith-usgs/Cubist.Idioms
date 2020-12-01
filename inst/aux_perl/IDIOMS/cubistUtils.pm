@@ -7,6 +7,7 @@ use Exporter;
 @ISA    = qw( Exporter );
 @EXPORT = qw( $ROBUST_ERROR_FACTOR $FINAL_ERROR_INFLATOR $PLUSMINUS $UNITS $DECIMAL_OUTPUT
               median mean_and_stdev weighted_mean_mean_error commify 
+              formRuleBranches formBranches formNuts formSampleInfo
               getBranches makeNuts removeInfinites robustAdjustment
               inspectResults makeResults stringResults crackBranch crackNut XrowToHashRef
             );
