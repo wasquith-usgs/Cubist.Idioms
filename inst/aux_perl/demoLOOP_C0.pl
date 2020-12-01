@@ -5,7 +5,7 @@ use utf8;
 binmode STDOUT, ":encoding(utf8)";
 
 # /usr/bin/perl: bad interpreter: Operation not permitted
-# xattr -d com.apple.quarantine ./demoLOOP_C1t3.pl
+# xattr -d com.apple.quarantine ./demoLOOP_C0.pl
 
 use Cwd qw( abs_path );
 use File::Basename qw( dirname );
@@ -60,6 +60,24 @@ if(! $show_string_results) {
   print "#ROW and rest of output names to insert here\n"
 }
 
+sub lineResults {
+  my $href = shift;
+  my $show_labels = shift;
+  my @keys = sort keys %{$href};
+  my @vals = ();
+  foreach my $key (@keys) {
+    push(@vals, $href->{$key});
+  }
+  print join("\t", @keys),"\n" if($show_labels);
+  print join("\t", @vals),"\n";
+}
+
+
+if(! $show_string_results) {
+  print "#ROW and rest of output names to insert here\n"
+}
+
+my $first = 1;
 my @labels = readLabels(); #print STDERR "LABELS: @labels\n";
 my $line = undef;
 my $row_i = 0;
@@ -169,6 +187,7 @@ while(<>) {
   my $sample_info = countExtract_Location_and_Response(@SAMPLE_INFO);
   my $sample_txt  = useExtracted_Location_and_Response($sample_info);
   my $results = makeResults(\@vals, \@sups, \@mues, \@mins, \@maxs, \@errs, \@mods, $diagnostics);
+
   if($show_string_results) {
     my $results_str = stringResults($results);
     print "ROW $row_i : Cubist Model Results\n";
@@ -177,10 +196,7 @@ while(<>) {
     print $results_str;
     print "-------------------------------------------------------------------------------\n";
   } else {
-    my @line = ();
-    push(@line, ($row_i, $results->{weighted_mean_estimate}));
-    push(@line,          $results->{weighted_mean_errors});
-    push(@line, $diagnostics->{used_medians_as_backup});
-    print join("\t", @line),"\n";
+    lineResults($results, $first);
+    $first = 0;
   }
 }

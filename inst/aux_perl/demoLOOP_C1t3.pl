@@ -75,6 +75,8 @@ if(! $show_string_results) {
   print "#ROW and rest of output names to insert here\n"
 }
 
+
+my $first = 1;
 my @labels = readLabels(); #print STDERR "LABELS: @labels\n";
 my $line = undef;
 my $row_i = 0;
@@ -193,6 +195,7 @@ while(<>) {
     print $results_str;
     print "-------------------------------------------------------------------------------\n";
   } else {
-    lineResults($results, 1);
+    lineResults($results, $first);
+    $first = 0;
   }
 }
