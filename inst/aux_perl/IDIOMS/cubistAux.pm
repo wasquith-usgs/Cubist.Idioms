@@ -1,4 +1,4 @@
-package IDIOMS::Aux;
+package IDIOMS::cubistAux;
 use strict;
 use utf8;
 use vars qw( @ISA @EXPORT );
