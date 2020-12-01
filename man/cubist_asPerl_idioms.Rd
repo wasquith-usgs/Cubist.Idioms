@@ -65,13 +65,21 @@ txt <- paste0("committees=",committees,":sample_size=",nsim)
 tmpath <- tempdir() # temporary directory
 message("temporary path = ",tmpath)
 
+# now write a text file to that directory that has the X values
+# in this example. This file can be re-read by
+# inst/aux_perl/demoLOOP_C0.pl X.txt 
+# to get predictions
+write.table(data.frame(X=seq(0,2, by=0.001)),
+            file=paste0(tmpath,"/","X.txt"),
+            sep="\t", row.names=FALSE, quote=FALSE)
+
 cubist_asPerl_idioms(cubist_tree, cubist_tag=cubist_tag,
                      path=tmpath, sample_str=txt)
                   
 files <- list.files(path=tmpath, pattern=paste0(".+",cubist_tag,".pm"))
 print(files)
-# [1] "cubistC9.pm"
-# so one source file of idioms for the C9 tagged Cubist were
+# [1] "cubistC0.pm"
+# so one source file of idioms for the C0 tagged Cubist were
 # made, and the cubist_utils.R is tag-independent and has a couple
 # of accessor functions to work with the our big picture }
 }
