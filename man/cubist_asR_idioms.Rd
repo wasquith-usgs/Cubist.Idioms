@@ -149,6 +149,7 @@ legend("topleft", c("Simulated data", "Cubist itself",
                     "Cubist idioms (mean)",
                     "Cubist idioms (weighted mean)"),
        lty=c(0, 1, 1, 2), lwd=c(0, 7, 3, 1), bty="n",
+       pch=c(1, NA, NA, NA), pt.lwd=c(0.4,NA,NA,NA),
        col=c(grey(0.2), 3, 2, 6), cex=0.8) #}
 }
 \keyword{R language}
