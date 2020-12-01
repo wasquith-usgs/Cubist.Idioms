@@ -144,12 +144,12 @@ plot(X$X,Y, type="p", lwd=0.4, col=grey(0.2),
       xlim=c(0,2), ylim=c(-1,2))
 lines(X$X, cubist_pred,      col=3, lwd=7)
 lines(X$X, Y_by_idioms_mean, col=2, lwd=3)
-lines(X$X, Y_by_idioms_wgt,  col=6, lwd=1, lty=2)
+lines(X$X, Y_by_idioms_wgt,  col="#2E5090", lwd=1.3, lty=2)
 legend("topleft", c("Simulated data", "Cubist itself",
                     "Cubist idioms (mean)",
                     "Cubist idioms (weighted mean)"),
-       lty=c(0, 1, 1, 2), lwd=c(0, 7, 3, 1), bty="n",
-       pch=c(1, NA, NA, NA), pt.lwd=c(0.4,NA,NA,NA),
-       col=c(grey(0.2), 3, 2, 6), cex=0.8) #}
+       lty=c(0, 1, 1, 2), lwd=c(0, 7, 3, 1.3), bty="n",
+       pch=c(1, NA, NA, NA), pt.lwd=c(0.4, NA, NA, NA),
+       col=c(grey(0.2), 3, 2, "#2E5090"), cex=0.8) #}
 }
 \keyword{R language}
