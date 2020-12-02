@@ -53,8 +53,8 @@ X <- data.frame(X=X, pi=pi) # the design that follows both by Cubist
 # and by the idiom functions in this package need at least two columns
 # even if the second column containing pi is never used.
 
-# We can foreshadow some type of cross-validation, but here just use all.
-phi <- 1
+# We can foreshadow some type of cross-validation, but here just use all
+phi <- 1   # when the phi parameter is set to unity.
 inSchool <- sample(1:nrow(X), floor(phi*nrow(X)))
 Xs <- X[ inSchool,]; Xt <- X[-inSchool,]
 Ys <- Y[ inSchool ]; Yt <- Y[-inSchool ]
@@ -90,12 +90,12 @@ print(files)
 # [4] "C9cubist_rules.R" "cubist_utils.R"
 # so four source files of idioms for the C9 tagged Cubist were
 # made, and the cubist_utils.R is tag-independent and has a couple
-# of accessor functions to work with the our big picture }
+# of accessor functions to work with the big picture }
 
 \donttest{
 # now begin a minimal recipe on use of the idioms and hence breaking
 # from a dependency of having to have Cubist library around to make
-# the predictions. first, the idiom files are sourced, here 5 files
+# the predictions. first, idiom files are sourced, here five files:
 for(file in files) source(paste0(tmpath,"/",file))
 
 # now some trickery, in case we had multiple tagged Cubist models
